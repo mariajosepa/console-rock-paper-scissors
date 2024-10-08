@@ -37,7 +37,6 @@ function getHumanChoice(){
             choice = choice.toLowerCase();
             if (choice === "rock" || choice === "paper" || choice ==="scissors"){
                 repeat = false
-                console.log(choice)
             }else{
                 alert("Error: Invalid choice! Please choose 'rock', 'paper', or 'scissors'.");
             }
