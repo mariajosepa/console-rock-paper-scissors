@@ -2,11 +2,29 @@
 
 let humanScore = 0;
 let machineScore = 0;
+let lastClickedChoice = "";
+const round = document.querySelector(".round");
+const humanScoreDisplay = document.getElementById("human-score");
+const machineScoreDisplay = document.getElementById("machine-score");
+const options = querySelectorAll(".btn");
 
 const machineWinMessage = (machineChoice,playerChoice) => "You lose! You chose " + playerChoice + " and the machine chose " + machineChoice;
 const playerWinMessage = (machineChoice,playerChoice) => "You win! You chose " + playerChoice + " and the machine chose " + machineChoice;
 const drawMessage = (machineChoice,playerChoice) => "It's a draw! You chose " + playerChoice + " and the machine chose " + machineChoice;
 const scoreMessage = (humanScore,machineScore) => "Machine Score: " + machineScore + " Player Score: " + humanScore;
+
+const handleClick = (e) => {
+
+    const clickedChoice = e.target.id;
+    lastClickedChoice = clickedChoice;
+}
+
+//Assign event listeners to each option, in order to know user selection
+options.forEach(option => {
+    option.addEventListener('click',handleClick);
+});
+
+
 
 function getMachineChoice(){
     randomNumber = Math.floor(Math.random()*3)+1;
@@ -74,12 +92,9 @@ function playRound(machineChoice, playerChoice){
 
     console.log(scoreMessage(humanScore,machineScore));
 }
-
 function playGame(){
 
     let round = 1;
-    //let valid = false;
-    //let humanChoice = "";
 
     while(round < 6){
         alert("Starting round number " + round);
@@ -92,4 +107,9 @@ function playGame(){
 
 
 }
- playGame()
+
+
+
+
+
+ //playGame()
