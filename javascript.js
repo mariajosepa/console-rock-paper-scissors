@@ -3,8 +3,6 @@ let machineScore = 0;
 let lastClickedChoice = "";
 let globalRound = 1;
 let restartClicked = false;
-let playerWin = true;
-let draw = false;
 
 const round = document.querySelector(".round");
 const scoringMessage = document.querySelector(".scoring-box-text");
@@ -15,6 +13,9 @@ const options = document.querySelectorAll(".btn");
 const result = document.querySelector(".result");
 const audioFiles = ['assets/rock1.mp3','assets/rock2.mp3','assets/rock3.mp3','assets/rock4.mp3','assets/rock5.mp3']
 const audioElements = audioFiles.map(file => new Audio(file));
+const lossSound = new Audio('assets/fail.mp3');
+const winSound = new Audio('assets/win.mp3');
+const drawSound = new Audio('assets/draw.mp3');
 
 
 const machineWinMessage = (machineChoice,playerChoice) => "You lose! You chose " + playerChoice + " and the machine chose " + machineChoice;
@@ -43,28 +44,6 @@ function getMachineChoice(){
     }
     return choice
 }
-function getHumanChoice(){
-
-    let repeat = true;
-    let choice = "";
-
-    while (repeat){
-        choice = prompt("Input your choice:");
-        if (choice !== null){
-
-            choice = choice.toLowerCase();
-            if (choice === "rock" || choice === "paper" || choice ==="scissors"){
-                repeat = false
-            }else{
-                alert("Error: Invalid choice! Please choose 'rock', 'paper', or 'scissors'.");
-            }
-        }
-        else{alert("Input cancelled. Please refresh to try again.");} 
-    }
-    
-    return choice
-}
-
 const playSound = () =>{
     randomNumber = Math.floor(Math.random()*5);
     audioElements[randomNumber].play();
@@ -91,26 +70,33 @@ const wipe = () =>{
     machineScore = 0;
     globalRound = 1;
     scoringMessage.innerText = "";
+    result.innerText = "";
     updateScore();
     updateRound();
     
 
 }
 
-const displayResult = (win,draw) =>{
+const displayResult = () =>{
 
-  if (win) {
+  if (humanScore > machineScore) {
     result.innerText = "You Win!";
+    winSound.play();
   }
-  else if(draw){
+  else if(humanScore == machineScore){
     result.innerText = "It's a Draw!";
+    drawSound.play();
   }
   else{
     result.innerText = "You Lost!";
+    lossSound.play();
   }
 }
 
 const handleClick = (e) => {
+
+    let playerWin = true;
+    let draw = false;
 
    
     globalRound += 1;
@@ -152,7 +138,7 @@ const handleClick = (e) => {
     }
 
     if (globalRound === 6) {
-      displayResult(playerWin,draw);
+      displayResult();
     }
 
       
