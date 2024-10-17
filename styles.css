@@ -71,7 +71,7 @@ h2{
 
 .scoring{
     width: 100%;
-    height: 300px;
+    height: 220px;
 
     display: flex;
     justify-content: center;
@@ -105,11 +105,11 @@ h2{
 
 .result{
     margin-left: 0px;
-    margin-top: 1em;
+    margin-top: 0.2em;
     width: 100%;
     height: 200px;
     color: blue;
-    font-size: 8em;
+    font-size: 4em;
     line-height: 1.5em;
     text-align: center;
 }
@@ -130,7 +130,7 @@ h2{
   
     .scoring{
         width: 100%;
-        height: 200px;
+        height: 180px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -142,6 +142,19 @@ h2{
         height: 8em;
         background-color: greenyellow;
     }
+
+    .result{
+      margin-left: 0px;
+      margin-top: 1.5em;
+      width: 100%;
+      height: 200px;
+      color: blue;
+      font-size: 4em;
+      line-height: 1.5em;
+      text-align: center;
+
+    }
+
 }
 
 @media only screen and (max-width:531px){
